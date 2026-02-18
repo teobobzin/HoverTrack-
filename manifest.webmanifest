@@ -1,14 +1,14 @@
 {
-  "background_color": "#0a1f44",
-  "description": "Digitize handwritten flight logs using Gemini AI. Professional electronic logbook solution for helicopter and fixed-wing pilots.",
+  "background_color": "#ffffff",
+  "description": "Professional electronic logbook for helicopter pilots with AI digitizing capabilities.",
   "dir": "ltr",
   "display": "standalone",
-  "name": "MyHeliLogs",
+  "name": "HoverTrack",
   "orientation": "any",
   "scope": "/",
-  "short_name": "MyHeliLogs",
+  "short_name": "HoverTrack",
   "start_url": "index.html",
-  "theme_color": "#0a1f44",
+  "theme_color": "#064e3b",
   "icons": [
     {
       "src": "https://img.icons8.com/fluency/512/helicopter.png",
@@ -17,5 +17,28 @@
       "purpose": "any maskable"
     }
   ],
-  "id": "MyHeliLogs-v1"
+  "screenshots": [
+    {
+      "src": "screenshot-terminal.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "HoverTrack Digital Terminal for scanning logs"
+    },
+    {
+      "src": "screenshot-table.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Rotorcraft flight records management"
+    },
+    {
+      "src": "screenshot-gallery.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Personal log archive and history"
+    }
+  ],
+  "id": "HoverTrack-v1"
 }

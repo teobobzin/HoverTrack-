@@ -49,7 +49,7 @@ const App: React.FC = () => {
   });
 
   const [columns, setColumns] = useState<ColumnDefinition[]>(DEFAULT_COLUMNS);
-  const [logbookYear, setLogbookYear] = useState<string>(new Date().getFullYear().toString());
+  const [logbookYear, setLogbookYear] = useState<string>("2026");
   const [status, setStatus] = useState<AppStatus>(AppStatus.IDLE);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -65,7 +65,7 @@ const App: React.FC = () => {
   const entries = history.present;
 
   useEffect(() => {
-    const saved = localStorage.getItem('skylog_saved_logs');
+    const saved = localStorage.getItem('hovertrack_saved_logs');
     if (saved) {
       try {
         setSavedLogs(JSON.parse(saved));
@@ -83,7 +83,7 @@ const App: React.FC = () => {
       const existingLog = existingId ? prev.find(l => l.id === existingId) : null;
       const timestamp = Date.now();
       const logId = existingId || `log-${timestamp}`;
-      const name = existingLog ? existingLog.name : `Flight Log ${new Date(timestamp).toLocaleDateString()}`;
+      const name = existingLog ? existingLog.name : `Log Page ${new Date(timestamp).toLocaleDateString()}`;
 
       const newLog: SavedLog = {
         id: logId,
@@ -96,7 +96,7 @@ const App: React.FC = () => {
 
       const filtered = prev.filter(l => l.id !== logId);
       const updated = [newLog, ...filtered];
-      localStorage.setItem('skylog_saved_logs', JSON.stringify(updated));
+      localStorage.setItem('hovertrack_saved_logs', JSON.stringify(updated));
       return updated;
     });
 
@@ -246,7 +246,7 @@ const App: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.setAttribute('href', url);
-    link.setAttribute('download', `MyHeliLogs_Export_${Date.now()}.csv`);
+    link.setAttribute('download', `HoverTrack_Export_${Date.now()}.csv`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
@@ -266,7 +266,7 @@ const App: React.FC = () => {
       });
       const dataUrl = canvas.toDataURL('image/png');
       const link = document.createElement('a');
-      link.download = `MyHeliLogs_Report_${new Date().toISOString().split('T')[0]}.png`;
+      link.download = `HoverTrack_Report_${new Date().toISOString().split('T')[0]}.png`;
       link.href = dataUrl;
       link.click();
     } catch (err) {
@@ -288,10 +288,10 @@ const App: React.FC = () => {
   };
 
   const handleDeleteSavedLog = (id: string) => {
-    if (confirm("Delete this log permanently from this device?")) {
+    if (confirm("Delete this log permanently?")) {
       setSavedLogs(prev => {
         const updated = prev.filter(l => l.id !== id);
-        localStorage.setItem('skylog_saved_logs', JSON.stringify(updated));
+        localStorage.setItem('hovertrack_saved_logs', JSON.stringify(updated));
         return updated;
       });
       if (activeLogId === id) {
@@ -306,72 +306,42 @@ const App: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       <Header onNavigate={setView} currentView={view} />
       
-      <main className="flex-grow max-w-7xl mx-auto px-6 py-10 w-full animate-fade-in">
+      <main className="flex-grow max-w-5xl mx-auto px-4 py-8 w-full animate-fade-in">
         {view === 'terminal' ? (
           <>
-            <section className="mb-12">
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-4">
-                    <h2 className="text-3xl font-black text-slate-900 tracking-tight">
-                      {activeLogId ? 'Terminal Console' : 'New Flight Record'}
-                    </h2>
-                    
-                    {activeLogId && (
-                      <div className="flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full border border-slate-200">
-                        {isSaving ? (
-                          <>
-                            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                            <span className="text-[10px] font-black text-blue-600 uppercase">Syncing...</span>
-                          </>
-                        ) : (
-                          <>
-                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                            <span className="text-[10px] font-black text-slate-500 uppercase">
-                              {lastSaved ? `Last Saved ${lastSaved.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : 'Local Terminal Ready'}
-                            </span>
-                          </>
-                        )}
-                      </div>
-                    )}
+            <section className="mb-10">
+              <div className="flex flex-col gap-6 mb-8">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-4xl font-bold text-slate-900 tracking-tight">
+                    Digital Terminal
+                  </h2>
+                  <div className="flex items-center gap-2">
+                    <button className="p-2 rounded-full hover:bg-slate-100 transition-colors">
+                      <i className="fas fa-share-alt text-slate-700"></i>
+                    </button>
+                    <button className="p-2 rounded-full hover:bg-slate-100 transition-colors">
+                      <i className="fas fa-flask text-emerald-600"></i>
+                    </button>
                   </div>
+                </div>
 
-                  <div className="flex items-center gap-3 bg-white border-2 border-[#0a1f44] px-4 py-2 rounded-xl shadow-sm w-fit group">
-                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest group-hover:text-blue-600 transition-colors">Calendar Year</span>
+                <div className="flex flex-col sm:flex-row items-center gap-4">
+                  <div className="flex items-center gap-3 bg-white border-2 border-[#064e3b] px-6 py-3 rounded-xl shadow-sm w-fit">
+                    <span className="text-xs font-bold text-slate-900 uppercase tracking-widest">LOGBOOK YEAR</span>
                     <input 
                       type="number" 
                       value={logbookYear} 
                       onChange={(e) => setLogbookYear(e.target.value)}
-                      className="w-20 font-black text-[#0a1f44] outline-none bg-transparent text-lg"
+                      className="w-16 font-bold text-slate-900 outline-none bg-transparent text-lg"
                     />
                   </div>
-                </div>
-                
-                <div className="flex flex-wrap items-center gap-3">
-                  {(history.past.length > 0 || history.future.length > 0) && (
-                    <div className="flex bg-white border-2 border-[#0a1f44] rounded-xl overflow-hidden shadow-sm mr-2">
-                      <button onClick={undo} disabled={history.past.length === 0} title="Undo (Ctrl+Z)" className={`p-2 px-3 border-r-2 border-[#0a1f44] transition-colors ${history.past.length === 0 ? 'opacity-20' : 'hover:bg-slate-100'}`}><i className="fas fa-rotate-left text-[#0a1f44]"></i></button>
-                      <button onClick={redo} disabled={history.future.length === 0} title="Redo (Ctrl+Y)" className={`p-2 px-3 transition-colors ${history.future.length === 0 ? 'opacity-20' : 'hover:bg-slate-100'}`}><i className="fas fa-rotate-right text-[#0a1f44]"></i></button>
-                    </div>
-                  )}
-
+                  
                   <button 
                     onClick={addBlankEntry}
-                    className="bg-white border-2 border-[#0a1f44] text-[#0a1f44] px-4 py-2 rounded-xl text-sm font-black hover:bg-slate-50 transition-colors shadow-sm flex items-center gap-2"
+                    className="bg-white border-2 border-[#064e3b] text-slate-900 px-6 py-3 rounded-xl text-sm font-bold hover:bg-slate-50 transition-colors shadow-sm flex items-center gap-2"
                   >
-                    <i className="fas fa-plus"></i> Manual Entry
+                    <i className="fas fa-plus"></i> Add Entry
                   </button>
-
-                  {entries.length > 0 && (
-                    <div className="flex items-center gap-2">
-                      <button onClick={handleExportCSV} className="bg-white border-2 border-[#0a1f44] text-[#0a1f44] px-4 py-2 rounded-xl text-sm font-black hover:bg-slate-50 transition-colors shadow-sm flex items-center gap-2">
-                        <i className="fas fa-file-csv"></i> CSV
-                      </button>
-                      <button onClick={handleExportImage} disabled={isExporting} className="bg-[#0a1f44] text-force-white px-4 py-2 rounded-xl text-sm font-black hover:bg-[#1e3a8a] transition-all shadow-md flex items-center gap-2">
-                        {isExporting ? <i className="fas fa-spinner animate-spin"></i> : <i className="fas fa-file-image"></i>} <span>PNG Report</span>
-                      </button>
-                    </div>
-                  )}
                 </div>
               </div>
 
@@ -393,20 +363,18 @@ const App: React.FC = () => {
 
             {entries.length > 0 && (
               <section className="mb-20">
-                <div className="flex items-center justify-between mb-4 px-2">
-                  <h3 className="text-xl font-black text-slate-800 flex items-center gap-2">
-                    <i className="fas fa-list-check text-blue-600"></i> Active Logbook Buffer
+                <div className="flex items-center justify-between mb-6 px-2">
+                  <h3 className="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <i className="fas fa-helicopter text-[#064e3b]"></i> Rotorcraft Log Records
                   </h3>
-                  <button onClick={() => { if(confirm("Discard all entries in the current buffer?")) updateEntriesWithHistory([]); }} className="text-xs font-black text-slate-400 hover:text-red-500 uppercase tracking-widest">
-                    Clear Buffer
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button onClick={handleExportCSV} className="text-xs font-bold text-[#064e3b] hover:underline uppercase tracking-widest">
+                      Export CSV
+                    </button>
+                  </div>
                 </div>
                 
-                <div ref={tableRef} className="bg-white rounded-2xl shadow-xl border-2 border-[#0a1f44] overflow-hidden">
-                   <div className="p-4 bg-[#0a1f44] text-white flex justify-between items-center">
-                      <span className="text-[10px] font-black uppercase tracking-[0.3em]">Official Pilot Flight Record</span>
-                      <span className="text-[10px] font-black uppercase">{new Date().toLocaleDateString()}</span>
-                   </div>
+                <div ref={tableRef} className="bg-white rounded-3xl shadow-xl border-2 border-[#064e3b] overflow-hidden">
                   <LogbookTable 
                     entries={entries} 
                     onUpdateEntry={(id, updates) => {
@@ -443,12 +411,12 @@ const App: React.FC = () => {
         ) : (
           <section>
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-black text-[#0a1f44] tracking-tight">Archives</h2>
+              <h2 className="text-4xl font-bold text-slate-900 tracking-tight">My Logs</h2>
               <button 
                 onClick={() => setView('terminal')}
-                className="bg-[#0a1f44] text-force-white px-6 py-2 rounded-xl text-sm font-black flex items-center gap-2 hover:bg-[#1e3a8a] transition-all shadow-md"
+                className="bg-[#064e3b] text-white px-6 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-emerald-900 transition-all shadow-md"
               >
-                <i className="fas fa-plus"></i> Create New Log
+                <i className="fas fa-plus"></i> New Log Page
               </button>
             </div>
             <LogGallery logs={savedLogs} onSelect={handleSelectSavedLog} onDelete={handleDeleteSavedLog} />
@@ -458,25 +426,21 @@ const App: React.FC = () => {
 
       {isCameraOpen && <CameraModal onCapture={handleImageCaptured} onClose={() => setIsCameraOpen(false)} />}
       
-      <footer className="bg-[#0a1f44] py-12 px-6 mt-auto">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
-          <div className="flex items-center gap-4">
-            <div className="bg-white border-2 border-[#0a1f44] p-2 rounded-xl flex items-center justify-center text-blue-600 shadow-inner">
-              <i className="fas fa-helicopter text-2xl"></i>
+      <footer className="bg-[#064e3b] py-16 px-6 mt-auto">
+        <div className="max-w-4xl mx-auto flex flex-col items-center text-center gap-8">
+          <div className="flex flex-col items-center gap-4">
+            <div className="bg-white p-3 rounded-xl flex items-center justify-center text-[#064e3b] shadow-xl">
+              <i className="fas fa-helicopter text-3xl"></i>
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-black tracking-tight text-white leading-none">MyHeliLogs</span>
-              <span className="text-[10px] font-black uppercase text-blue-300 tracking-widest mt-1">Avionics Grade Terminal</span>
+              <span className="text-2xl font-bold tracking-tight text-white leading-none">HoverTrack</span>
+              <span className="text-[10px] font-bold uppercase text-emerald-200 tracking-[0.2em] mt-2">HELICOPTER OPERATIONS TERMINAL</span>
             </div>
           </div>
-          <div className="flex justify-center gap-6">
-              <a href="#" className="text-white/40 hover:text-white text-xs font-black uppercase tracking-widest transition-colors">Safety</a>
-              <a href="#" className="text-white/40 hover:text-white text-xs font-black uppercase tracking-widest transition-colors">Privacy</a>
-              <a href="#" className="text-white/40 hover:text-white text-xs font-black uppercase tracking-widest transition-colors">Help</a>
-          </div>
-          <div className="flex flex-col md:items-end gap-2 text-right">
-             <span className="text-[10px] font-black uppercase text-white/80 bg-blue-600/30 px-2 py-1 rounded border border-blue-400/30">Release v1.2.4 "Electron"</span>
-             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">© 2025 Flight Systems International</p>
+          
+          <div className="flex flex-col gap-2">
+            <p className="text-xs font-bold uppercase tracking-widest text-white/90">PROFESSIONAL EDITION</p>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/50">© 2025 HOVERTRACK SYSTEMS</p>
           </div>
         </div>
       </footer>

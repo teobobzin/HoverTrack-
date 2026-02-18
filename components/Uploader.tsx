@@ -32,8 +32,8 @@ const Uploader: React.FC<UploaderProps> = ({ onImageSelected, onOpenCamera, isLo
   return (
     <div className="flex flex-col gap-6">
       <div 
-        className={`relative border-2 border-dashed rounded-3xl p-10 transition-all text-center
-          ${isDragging ? 'border-blue-500 bg-blue-50' : 'border-[#0a1f44] bg-white hover:bg-slate-50 shadow-lg'}
+        className={`relative border-2 border-dashed rounded-[40px] p-16 transition-all text-center
+          ${isDragging ? 'border-emerald-500 bg-emerald-50' : 'border-[#064e3b] bg-white'}
           ${isLoading ? 'opacity-50 pointer-events-none' : ''}`}
         onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
         onDragLeave={() => setIsDragging(false)}
@@ -42,61 +42,55 @@ const Uploader: React.FC<UploaderProps> = ({ onImageSelected, onOpenCamera, isLo
         <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={onFileChange} />
         
         <div className="flex flex-col items-center">
-          <div className="w-20 h-20 border-2 border-[#0a1f44] bg-white rounded-2xl flex items-center justify-center mb-6 text-blue-600 shadow-xl group hover:scale-105 transition-transform">
-            <i className="fas fa-camera-retro text-3xl"></i>
+          <div className="w-20 h-20 border-2 border-[#064e3b] bg-white rounded-full flex items-center justify-center mb-8 text-blue-600 shadow-xl">
+            <i className="fas fa-camera text-3xl"></i>
           </div>
-          <h3 className="text-2xl font-black text-slate-900 mb-2">Digitize Flight Logs</h3>
-          <p className="text-slate-500 mb-8 max-w-sm mx-auto text-sm font-medium">
-            Snap a clear overhead photo of your handwritten logbook. Ensure no shadows cover the text.
+          <h3 className="text-3xl font-bold text-slate-900 mb-4">Digitize Logbook Page</h3>
+          <p className="text-slate-700 mb-10 max-w-sm mx-auto text-lg font-medium">
+            Snap a photo or upload an image of your handwritten flight records.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
+          <div className="flex flex-col gap-4 w-full max-w-sm">
             <button 
               onClick={() => { setUploadMode('extract'); onOpenCamera('extract'); }}
-              className="flex-1 bg-[#0a1f44] text-force-white px-8 py-4 rounded-2xl font-black hover:bg-[#1e3a8a] transition-all shadow-xl flex items-center justify-center gap-3 active:scale-95"
+              className="w-full bg-[#064e3b] text-white px-8 py-4 rounded-2xl font-bold hover:bg-emerald-900 transition-all shadow-xl flex items-center justify-center gap-3"
             >
-              <i className="fas fa-camera"></i> <span>Scan Page</span>
+              <i className="fas fa-camera"></i> <span>Take Photo</span>
             </button>
             <button 
               onClick={() => { setUploadMode('extract'); fileInputRef.current?.click(); }}
-              className="flex-1 bg-white border-2 border-[#0a1f44] text-[#0a1f44] px-8 py-4 rounded-2xl font-black hover:bg-slate-50 transition-all shadow-xl flex items-center justify-center gap-3 active:scale-95"
+              className="w-full bg-white border-2 border-[#064e3b] text-slate-900 px-8 py-4 rounded-2xl font-bold hover:bg-slate-50 transition-all shadow-xl flex items-center justify-center gap-3"
             >
-              <i className="fas fa-folder-open"></i> <span>Upload</span>
+              <i className="fas fa-file-upload"></i> <span>Choose File</span>
             </button>
           </div>
         </div>
 
         {isLoading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-white/95 backdrop-blur-[4px] rounded-3xl z-20">
+          <div className="absolute inset-0 flex items-center justify-center bg-white/95 backdrop-blur-[4px] rounded-[40px] z-20">
             <div className="flex flex-col items-center">
-              <div className="relative">
-                <div className="animate-spin rounded-full h-24 w-24 border-b-4 border-blue-600"></div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-white border-2 border-[#0a1f44] rounded-xl flex items-center justify-center text-blue-600 shadow-xl">
-                  <i className="fas fa-helicopter animate-pulse text-xl"></i>
-                </div>
-              </div>
-              <p className="text-[#0a1f44] font-black mt-8 text-xl uppercase tracking-widest">Processing Frames...</p>
-              <p className="text-blue-600 text-xs font-black uppercase mt-2 tracking-widest">Gemini-3-Flash OCR Active</p>
+              <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-emerald-600"></div>
+              <p className="text-[#064e3b] font-bold mt-6 text-xl">Processing Log...</p>
             </div>
           </div>
         )}
       </div>
 
-      <div className="bg-white border-2 border-[#0a1f44] rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md border-l-8 border-l-blue-600">
-        <div className="flex items-center gap-5">
-          <div className="w-14 h-14 bg-blue-50 border-2 border-blue-200 rounded-2xl flex items-center justify-center text-blue-600 shadow-sm">
-            <i className="fas fa-microchip text-xl"></i>
+      <div className="bg-white border-2 border-[#064e3b] rounded-[40px] p-10 flex flex-col items-center gap-6 shadow-md">
+        <div className="flex items-center gap-6 w-full">
+          <div className="w-16 h-16 border-2 border-[#064e3b] rounded-full flex items-center justify-center text-blue-600">
+            <i className="fas fa-magic text-2xl"></i>
           </div>
-          <div>
-            <h4 className="font-black text-slate-900">Custom Log Format Recognition</h4>
-            <p className="text-xs text-slate-500 font-bold uppercase tracking-tighter">AI will analyze your unique column structure before extraction.</p>
+          <div className="text-left">
+            <h4 className="text-xl font-bold text-slate-900 mb-1">Custom Logbook Format?</h4>
+            <p className="text-sm text-slate-700 font-bold">Let AI recognize your unique logbook layout automatically.</p>
           </div>
         </div>
         <button 
           onClick={() => { setUploadMode('format'); onOpenCamera('format'); }}
-          className="bg-blue-600 text-force-white px-8 py-3 rounded-2xl text-sm font-black hover:bg-blue-700 transition-all flex items-center gap-3 shadow-lg active:scale-95"
+          className="bg-[#064e3b] text-white px-10 py-3 rounded-2xl text-md font-bold hover:bg-emerald-900 transition-all shadow-lg"
         >
-          <i className="fas fa-brain"></i> <span>Train AI Format</span>
+          Learn Format from Photo
         </button>
       </div>
     </div>
