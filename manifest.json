@@ -1,13 +1,13 @@
 {
   "background_color": "#064e3b",
   "description": "Digitize handwritten flight logs using Gemini AI. Professional electronic logbook solution for helicopter and fixed-wing pilots.",
-  "dir": "auto",
-  "display": "fullscreen",
+  "dir": "ltr",
+  "display": "standalone",
   "name": "MyHeliLogs",
   "orientation": "any",
   "scope": "/",
   "short_name": "MyHeliLogs",
-  "start_url": "https://myhelilogs-pilot-logbook-604899483063.us-west1.run.app",
+  "start_url": "/https://myhelilogs-pilot-logbook-604899483063.us-west1.run.app",
   "theme_color": "#064e3b",
   "icons": [
     {
@@ -23,9 +23,5 @@
       "is256x256": false,
       "is192x192": false
     }
-  ],
-  "lang": "en",
-  "categories": [
-    "education"
   ]
 }
