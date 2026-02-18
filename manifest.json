@@ -1,56 +1,31 @@
 {
-  "id": "com.myhelilogs.pilotlogbook.v1",
-  "name": "MyHeliLogs",
-  "short_name": "MyHeliLogs",
-  "description": "Digitize handwritten flight logs using Gemini AI. Professional electronic logbook solution for helicopter and fixed-wing pilots.",
-  "lang": "en-US",
-  "dir": "ltr",
-  "start_url": "index.html",
-  "scope": "./",
-  "display": "standalone",
-  "orientation": "any",
   "background_color": "#064e3b",
+  "description": "Digitize handwritten flight logs using Gemini AI. Professional electronic logbook solution for helicopter and fixed-wing pilots.",
+  "dir": "auto",
+  "display": "fullscreen",
+  "name": "MyHeliLogs",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "MyHeliLogs",
+  "start_url": "https://myhelilogs-pilot-logbook-604899483063.us-west1.run.app",
   "theme_color": "#064e3b",
-  "categories": [
-    "education",
-    "productivity",
-    "utilities",
-    "business"
-  ],
   "icons": [
     {
       "src": "https://img.icons8.com/fluency/512/helicopter.png",
       "type": "image/png",
       "sizes": "512x512",
-      "purpose": "any"
-    },
-    {
-      "src": "https://img.icons8.com/fluency/192/helicopter.png",
-      "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any"
-    },
-    {
-      "src": "https://img.icons8.com/fluency/512/helicopter.png",
-      "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "maskable"
+      "isSquare": true,
+      "isPng": true,
+      "isWebp": false,
+      "isJpg": false,
+      "width": 512,
+      "is512x512": true,
+      "is256x256": false,
+      "is192x192": false
     }
   ],
-  "screenshots": [
-    {
-      "src": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1000&auto=format&fit=crop",
-      "sizes": "1000x1500",
-      "type": "image/jpeg",
-      "form_factor": "narrow",
-      "label": "MyHeliLogs Terminal View"
-    },
-    {
-      "src": "https://images.unsplash.com/photo-1464039397811-476f652a343b?q=80&w=1280&auto=format&fit=crop",
-      "sizes": "1280x800",
-      "type": "image/jpeg",
-      "form_factor": "wide",
-      "label": "MyHeliLogs Desktop View"
-    }
+  "lang": "en",
+  "categories": [
+    "education"
   ]
 }
