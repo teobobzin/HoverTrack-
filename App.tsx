@@ -181,7 +181,6 @@ const App: React.FC = () => {
         const extractedEntries = await extractLogbookData(base64, columns.filter(c => c.visible), logbookYear);
         
         const batchId = `batch-${Date.now()}`;
-        // Fix: Explicitly cast mapped entries to LogbookEntry[] to ensure the compiler recognizes all required properties are present.
         const processedEntries = extractedEntries.map(e => ({
           ...e,
           batchId,
@@ -293,7 +292,7 @@ const App: React.FC = () => {
       });
       const dataUrl = canvas.toDataURL('image/png');
       const link = document.createElement('a');
-      link.download = `HoverTrack_Export_${logbookYear}_${new Date().getTime()}.png`;
+      link.download = `MyHeliLogs_Export_${logbookYear}_${new Date().getTime()}.png`;
       link.href = dataUrl;
       link.click();
     } catch (err) {
@@ -453,20 +452,21 @@ const App: React.FC = () => {
 
       {isCameraOpen && <CameraModal onCapture={handleImageCaptured} onClose={() => setIsCameraOpen(false)} />}
       
-      <footer className="bg-[#064e3b] text-force-white py-10 px-6 mt-auto">
+      <footer className="bg-[#064e3b] py-10 px-6 mt-auto">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-4">
+            {/* Header logo copy */}
             <div className="bg-white border-2 border-[#064e3b] p-2 rounded-lg flex items-center justify-center text-blue-600">
               <i className="fas fa-helicopter text-xl"></i>
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold tracking-tight text-white leading-none">HoverTrack</span>
+              <span className="text-xl font-bold tracking-tight text-white leading-none">MyHeliLogs</span>
               <span className="text-[10px] font-black uppercase text-white/60 tracking-tighter mt-1">Helicopter Operations Terminal</span>
             </div>
           </div>
           <div className="flex flex-col md:items-end gap-2">
              <span className="text-xs font-black uppercase text-white/80">Professional Edition</span>
-             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">© 2025 HoverTrack Systems</p>
+             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">© 2025 MyHeliLogs Systems</p>
           </div>
         </div>
       </footer>

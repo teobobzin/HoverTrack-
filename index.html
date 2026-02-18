@@ -4,74 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HoverTrack - Pilot Electronic Logbook</title>
+    <title>MyHeliLogs - Pilot Electronic Logbook</title>
     
-    <!-- PWA Meta Tags -->
-    <link rel="manifest" href="manifest.webmanifest" crossorigin="use-credentials">
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#064e3b">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="HoverTrack">
+    <meta name="apple-mobile-web-app-title" content="MyHeliLogs">
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3063/3063822.png">
     
-    <meta name="application-name" content="HoverTrack">
-    <meta name="msapplication-TileColor" content="#064e3b">
-    <meta name="description" content="Digitize handwritten flight logs using AI. Professional electronic logbook solution for helicopter and fixed-wing pilots.">
+    <meta name="description" content="Digitize handwritten flight logs using Gemini AI. Professional electronic logbook solution for helicopter and fixed-wing pilots.">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        :root {
-            --terminal-green: #064e3b;
-            --terminal-green-light: #065f46;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-            color: #000000;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .aviation-gradient {
-            background: #ffffff;
-            border-bottom: 2px solid var(--terminal-green);
-        }
-        /* Base text color reset */
-        h1, h2, h3, h4, p, span, div, button, input, select, td, th {
-            color: #000000;
-        }
-        /* Utilities for dark backgrounds */
-        .text-force-white {
-            color: #ffffff !important;
-        }
-        .text-force-white h1, 
-        .text-force-white h2, 
-        .text-force-white h3, 
-        .text-force-white h4, 
-        .text-force-white p, 
-        .text-force-white span,
-        .text-force-white button {
-            color: #ffffff !important;
-        }
-        
-        /* Ensure icons inside white containers aren't forced to white */
-        .bg-white i {
-            color: inherit;
-        }
-
-        .terminal-btn:hover {
-            opacity: 0.9;
-        }
-        /* Mobile optimization */
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            height: 100%;
-        }
-        #root {
-            height: 100%;
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #000000; -webkit-tap-highlight-color: transparent; }
+        h1, h2, h3, h4, p, span, div, button, input, select, td, th { color: #000000; }
+        .text-force-white, .text-force-white * { color: #ffffff !important; }
+        @keyframes fade-in { from { opacity: 0; transform: translate(-50%, -10px); } to { opacity: 1; transform: translate(-50%, 0); } }
+        .animate-fade-in { animation: fade-in 0.3s ease-out forwards; }
     </style>
 <script type="importmap">
 {

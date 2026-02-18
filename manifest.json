@@ -1,65 +1,22 @@
 
 {
-  "name": "HoverTrack Pilot Electronic Logbook",
-  "short_name": "HoverTrack",
-  "id": "hovertrack-pilot-logbook-v1",
-  "description": "Digitize handwritten flight logs using AI. Professional electronic logbook solution for helicopter and fixed-wing pilots.",
-  "lang": "en-US",
-  "dir": "ltr",
+  "name": "MyHeliLogs Pilot Logbook",
+  "short_name": "MyHeliLogs",
+  "description": "Professional electronic logbook for pilots. Digitize handwritten logs using Gemini AI.",
   "start_url": "./index.html",
-  "scope": "./",
   "display": "standalone",
-  "display_override": ["window-controls-overlay", "minimal-ui"],
-  "theme_color": "#064e3b",
   "background_color": "#ffffff",
-  "orientation": "any",
-  "categories": [
-    "productivity",
-    "utilities",
-    "travel"
-  ],
-  "prefer_related_applications": false,
+  "theme_color": "#064e3b",
   "icons": [
     {
       "src": "https://cdn-icons-png.flaticon.com/512/3063/3063822.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
       "src": "https://cdn-icons-png.flaticon.com/512/3063/3063822.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "New Log Entry",
-      "url": "./index.html?action=new",
-      "description": "Quickly add a new flight record",
-      "icons": [
-        {
-          "src": "https://cdn-icons-png.flaticon.com/512/3063/3063822.png",
-          "sizes": "192x192"
-        }
-      ]
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=2070&auto=format&fit=crop",
-      "sizes": "2070x1380",
-      "type": "image/jpeg",
-      "form_factor": "wide",
-      "label": "HoverTrack Desktop View"
-    },
-    {
-      "src": "https://images.unsplash.com/photo-1517976487492-5750f3195933?q=80&w=2070&auto=format&fit=crop",
-      "sizes": "2070x1380",
-      "type": "image/jpeg",
-      "form_factor": "narrow",
-      "label": "HoverTrack Mobile View"
+      "type": "image/png"
     }
   ]
 }

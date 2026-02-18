@@ -8,10 +8,10 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').then(
       (registration) => {
-        console.log('HoverTrack SW registered: ', registration.scope);
+        console.log('MyHeliLogs SW registered: ', registration.scope);
       },
       (err) => {
-        console.log('HoverTrack SW registration failed: ', err);
+        console.log('MyHeliLogs SW registration failed: ', err);
       }
     );
   });

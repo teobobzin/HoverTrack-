@@ -1,6 +1,6 @@
 {
-  "name": "Copy of HoverTrack",
-  "description": "A high-performance electronic logbook for pilots that uses AI to convert handwritten flight logs into digital records.",
+  "name": "MyHeliLogs Pilot Logbook",
+  "description": "Professional electronic logbook for pilots with AI digitizing capabilities.",
   "requestFramePermissions": [
     "camera"
   ]
