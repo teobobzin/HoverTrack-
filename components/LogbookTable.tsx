@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { LogbookEntry, ColumnDefinition } from '../types';
 import ColumnManager from './ColumnManager';
@@ -22,7 +21,7 @@ const InputField: React.FC<InputFieldProps> = ({ entry, field, className, type =
         const val = type === 'number' ? parseFloat(e.target.value) : e.target.value;
         onUpdateEntry(entry.id, { [field]: isNaN(val as any) && type === 'number' ? null : val });
       }}
-      className={`${className} transition-all border border-transparent focus:border-[#064e3b] focus:bg-white rounded p-1 text-sm font-bold text-black bg-transparent outline-none`}
+      className={`${className} transition-all border border-transparent focus:border-[#0a1f44] focus:bg-white rounded p-1 text-sm font-bold text-black bg-transparent outline-none`}
     />
   );
 };
@@ -123,16 +122,16 @@ const LogbookTable: React.FC<LogbookTableProps> = ({
 
       return (
         <div className="flex items-center gap-1">
-          <div className="flex items-center gap-1 border-r border-[#064e3b] pr-2">
+          <div className="flex items-center gap-1 border-r border-[#0a1f44] pr-2">
             {isEditable ? (
-              <input type="number" value={dayCarry} onChange={(e) => onUpdateAmountForward('ldgDay', parseFloat(e.target.value) || 0)} className="w-8 text-center bg-transparent border-b border-[#064e3b] text-[10px] font-black text-black" />
+              <input type="number" value={dayCarry} onChange={(e) => onUpdateAmountForward('ldgDay', parseFloat(e.target.value) || 0)} className="w-8 text-center bg-transparent border-b border-[#0a1f44] text-[10px] font-black text-black" />
             ) : (
               <span className="text-[10px] text-black font-black">{(dayVal + dayCarry)}</span>
             )}
           </div>
           <div className="flex items-center gap-1 pl-1">
              {isEditable ? (
-              <input type="number" value={nightCarry} onChange={(e) => onUpdateAmountForward('ldgNight', parseFloat(e.target.value) || 0)} className="w-8 text-center bg-transparent border-b border-[#064e3b] text-[10px] font-black text-black" />
+              <input type="number" value={nightCarry} onChange={(e) => onUpdateAmountForward('ldgNight', parseFloat(e.target.value) || 0)} className="w-8 text-center bg-transparent border-b border-[#0a1f44] text-[10px] font-black text-black" />
             ) : (
               <span className="text-[10px] text-black font-black">{(nightVal + nightCarry)}</span>
             )}
@@ -151,7 +150,7 @@ const LogbookTable: React.FC<LogbookTableProps> = ({
           step="0.1"
           value={carry} 
           onChange={(e) => onUpdateAmountForward(col.key, parseFloat(e.target.value) || 0)} 
-          className="w-12 text-center bg-transparent border-b border-[#064e3b] text-[10px] font-black text-black outline-none" 
+          className="w-12 text-center bg-transparent border-b border-[#0a1f44] text-[10px] font-black text-black outline-none" 
         />
       );
     }
@@ -162,7 +161,7 @@ const LogbookTable: React.FC<LogbookTableProps> = ({
   return (
     <div className="mt-8 flex flex-col gap-4">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-        <button onClick={() => setIsColManagerOpen(true)} className="flex items-center gap-2 bg-white border-2 border-[#064e3b] text-black px-4 py-2 rounded-xl text-sm font-black hover:bg-slate-50 shadow-sm">
+        <button onClick={() => setIsColManagerOpen(true)} className="flex items-center gap-2 bg-white border-2 border-[#0a1f44] text-black px-4 py-2 rounded-xl text-sm font-black hover:bg-slate-50 shadow-sm">
           <i className="fas fa-columns text-black"></i> Configure Columns
         </button>
         <div className="relative w-full sm:w-72">
@@ -172,24 +171,24 @@ const LogbookTable: React.FC<LogbookTableProps> = ({
             placeholder="Search logs..." 
             value={searchTerm} 
             onChange={(e) => setSearchTerm(e.target.value)} 
-            className="w-full pl-9 pr-4 py-2 bg-white border-2 border-[#064e3b] rounded-xl text-sm font-bold text-black focus:ring-2 focus:ring-[#064e3b] outline-none shadow-sm placeholder-black/50"
+            className="w-full pl-9 pr-4 py-2 bg-white border-2 border-[#0a1f44] rounded-xl text-sm font-bold text-black focus:ring-2 focus:ring-[#0a1f44] outline-none shadow-sm placeholder-black/50"
           />
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-xl shadow-xl border-2 border-[#064e3b] bg-white">
-        <table className="min-w-full divide-y divide-[#064e3b]">
-          <thead className="bg-[#064e3b]/5">
+      <div className="overflow-x-auto rounded-xl shadow-xl border-2 border-[#0a1f44] bg-white">
+        <table className="min-w-full divide-y divide-[#0a1f44]">
+          <thead className="bg-[#0a1f44]/5">
             <tr>
               {visibleColumns.map(col => (
-                <th key={col.key} className="px-3 py-3 text-left text-[11px] font-black text-black uppercase tracking-wider cursor-pointer hover:bg-[#064e3b]/10 whitespace-pre-line leading-tight" onClick={() => handleSort(col.key)}>
+                <th key={col.key} className="px-3 py-3 text-left text-[11px] font-black text-black uppercase tracking-wider cursor-pointer hover:bg-[#0a1f44]/10 whitespace-pre-line leading-tight" onClick={() => handleSort(col.key)}>
                   {col.label} {sortConfig.key === col.key && (sortConfig.direction === 'asc' ? '↑' : '↓')}
                 </th>
               ))}
               <th className="px-3 py-3 text-center text-[11px] font-black text-black uppercase">Del</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-[#064e3b]/20">
+          <tbody className="bg-white divide-y divide-[#0a1f44]/20">
             {(() => {
               let cumulativeTotals: Record<string, number> = { ...amountForward };
               
@@ -219,7 +218,7 @@ const LogbookTable: React.FC<LogbookTableProps> = ({
                               </div>
                             ) : col.key === 'ldgSub' ? (
                               <div className="flex items-center gap-1">
-                                <div className="flex items-center gap-1 border-r border-[#064e3b] pr-2">
+                                <div className="flex items-center gap-1 border-r border-[#0a1f44] pr-2">
                                   <span className="text-[9px] text-black font-black uppercase">D:</span>
                                   <InputField entry={entry} field="ldgDay" type="number" className="w-8 text-center" onUpdateEntry={onUpdateEntry} />
                                 </div>
@@ -242,7 +241,7 @@ const LogbookTable: React.FC<LogbookTableProps> = ({
                     ))}
 
                     {/* Summary Rows for this specific batch (page) */}
-                    <tr className="bg-slate-50/50 border-t border-[#064e3b]/40">
+                    <tr className="bg-slate-50/50 border-t border-[#0a1f44]/40">
                       {visibleColumns.map((col, idx) => (
                         <td key={`batch-pt-${batch.id}-${col.key}`} className="px-3 py-1 whitespace-nowrap">
                           {idx === 0 ? <span className="text-[9px] font-black text-black uppercase opacity-60">Page Total</span> : renderSummaryCell(col, batchTotals, {}, false)}
@@ -258,7 +257,7 @@ const LogbookTable: React.FC<LogbookTableProps> = ({
                       ))}
                       <td></td>
                     </tr>
-                    <tr className="bg-slate-50 border-b border-[#064e3b]/40">
+                    <tr className="bg-slate-50 border-b border-[#0a1f44]/40">
                       {visibleColumns.map((col, idx) => (
                         <td key={`batch-ttd-${batch.id}-${col.key}`} className="px-3 py-2 whitespace-nowrap">
                           {idx === 0 ? <span className="text-[10px] font-black text-blue-600 uppercase">Total to Date</span> : renderSummaryCell(col, batchTotals, batchAmountForward, false)}

@@ -1,19 +1,18 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
 // Register Service Worker for PWA / Offline Support
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').then(
-      (registration) => {
-        console.log('MyHeliLogs SW registered: ', registration.scope);
-      },
-      (err) => {
-        console.log('MyHeliLogs SW registration failed: ', err);
-      }
-    );
+  window.addEventListener('load', async () => {
+    try {
+      // Using the specific name requested by PWABuilder
+      // Fix: Property 'worker' does not exist on type 'Navigator'. Use 'serviceWorker' instead.
+      const registration = await navigator.serviceWorker.register('./pwabuilder-sw.js');
+      console.log('MyHeliLogs SW registered: ', registration.scope);
+    } catch (err) {
+      console.log('MyHeliLogs SW registration failed: ', err);
+    }
   });
 }
 

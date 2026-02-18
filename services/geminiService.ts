@@ -1,10 +1,9 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import { LogbookEntry, ColumnDefinition } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 export const recognizeLogbookFormat = async (base64Image: string): Promise<Partial<ColumnDefinition>[]> => {
+  // Fix: Create a new GoogleGenAI instance right before making an API call to ensure it always uses the most up-to-date configuration.
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const prompt = `
     Analyze this image of a pilot's flight logbook. Identify all column headers present in the logbook structure.
     For each column found, determine:
@@ -50,6 +49,8 @@ export const recognizeLogbookFormat = async (base64Image: string): Promise<Parti
 };
 
 export const extractLogbookData = async (base64Image: string, activeColumns: ColumnDefinition[], logbookYear: string): Promise<LogbookEntry[]> => {
+  // Fix: Create a new GoogleGenAI instance right before making an API call to ensure it always uses the most up-to-date configuration.
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const columnDescriptions = activeColumns.map(c => `${c.label} (${c.type})`).join(', ');
   
   const prompt = `

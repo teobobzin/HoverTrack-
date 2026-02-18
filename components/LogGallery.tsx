@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { SavedLog } from '../types';
 
@@ -11,8 +10,8 @@ interface LogGalleryProps {
 const LogGallery: React.FC<LogGalleryProps> = ({ logs, onSelect, onDelete }) => {
   if (logs.length === 0) {
     return (
-      <div className="py-20 text-center border-2 border-dashed border-[#064e3b] rounded-3xl bg-slate-50">
-        <div className="w-24 h-24 bg-white border-2 border-[#064e3b] rounded-full flex items-center justify-center mx-auto mb-6 text-blue-600 shadow-lg">
+      <div className="py-20 text-center border-2 border-dashed border-[#0a1f44] rounded-3xl bg-slate-50">
+        <div className="w-24 h-24 bg-white border-2 border-[#0a1f44] rounded-full flex items-center justify-center mx-auto mb-6 text-blue-600 shadow-lg">
           <i className="fas fa-folder-open text-4xl"></i>
         </div>
         <h3 className="text-2xl font-black text-black mb-2">No Saved Logs Found</h3>
@@ -26,11 +25,11 @@ const LogGallery: React.FC<LogGalleryProps> = ({ logs, onSelect, onDelete }) => 
       {logs.map((log) => (
         <div 
           key={log.id} 
-          className="group bg-white border-2 border-[#064e3b] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col"
+          className="group bg-white border-2 border-[#0a1f44] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col"
         >
-          <div className="p-5 border-b-2 border-[#064e3b] bg-slate-50">
+          <div className="p-5 border-b-2 border-[#0a1f44] bg-slate-50">
             <div className="flex justify-between items-start mb-2">
-              <span className="bg-[#064e3b] text-force-white text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest">
+              <span className="bg-[#0a1f44] text-force-white text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest">
                 {log.year} Log
               </span>
               <button 
@@ -60,7 +59,7 @@ const LogGallery: React.FC<LogGalleryProps> = ({ logs, onSelect, onDelete }) => 
             </div>
             <button 
               onClick={() => onSelect(log)}
-              className="w-full bg-[#064e3b] text-force-white py-3 rounded-xl font-black hover:bg-[#065f46] transition-all flex items-center justify-center gap-2"
+              className="w-full bg-[#0a1f44] text-force-white py-3 rounded-xl font-black hover:bg-[#1e3a8a] transition-all flex items-center justify-center gap-2"
             >
               <i className="fas fa-edit text-white"></i> <span>Edit Log</span>
             </button>
